@@ -22,20 +22,22 @@ export const RegisterPage = () => {
 
   const submit = (data) => {
     registerUser(data);
+    console.log(data);
     reset();
   };
   return (
     <StyledContainerForm>
       <header>
         <img src={Logo} alt="Logo Kenzie" />
+
         <Link to="/" className="secondBtn" type="submit">
           Voltar
         </Link>
       </header>
       <main>
-        <form onSubmit={handleSubmit(registerUser)}>
+        <form onSubmit={handleSubmit(submit)}>
           <h1>Crie sua conta</h1>
-          <h2>Rapido e gratis, vamos nessa...</h2>
+          <h2>Rapidoo e gratis, vamos nessa</h2>
           <p>{errors.name?.message}</p>
           <div>
             <label htmlFor="">Nome</label>
@@ -48,7 +50,6 @@ export const RegisterPage = () => {
             <input type="text" id="email" {...register("email")} placeholder="Email" />
             <p>{errors.email?.message}</p>
           </div>
-
           <div>
             <label htmlFor="">Senha</label>
             <input type="password" id="senha" {...register("password")} placeholder="Senha" />
@@ -58,7 +59,13 @@ export const RegisterPage = () => {
           <div>
             <label htmlFor="">Confirmação</label>
             <input type="password" id="confirme" {...register("confirm")} placeholder="Confirme a senha" />
-            <p>{errors.confirm?.massege}</p>
+            <p>{errors.confirm?.message}</p>
+          </div>
+
+          <div>
+            <label htmlFor="">Bio</label>
+            <input type="text" id="bio" {...register("bio")} placeholder="Bio" />
+            <p>{errors.bio?.message}</p>
           </div>
 
           <div>

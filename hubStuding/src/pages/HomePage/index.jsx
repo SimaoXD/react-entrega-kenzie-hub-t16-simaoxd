@@ -3,6 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
+import { TechContext } from "../../providers/TechContext";
+import StyledHome from "./style";
+
 export const HomePage = () => {
   const { setIdentify, setIsModalOpen, handleDeleteTech, tech } = useContext(TechContext);
 
@@ -12,7 +15,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const userId = localStorage.getIitem("KENZIEHUBUSER");
+      const userId = localStorage.getItem("@KENZIEHUBUSER");
       const response = await api.get(`/users/${userId}`);
       setUser(response.data);
     };
@@ -27,14 +30,15 @@ export const HomePage = () => {
   };
 
   return (
-    <div>
+    <StyledHome>
       <main>
         <header>
           <img src={Logo} alt="Logo Kenzie" />
-          <button classeName="secondBtn" onClinck={logout}>
+          <button className="secondBtn" onClick={logout}>
             Sair
           </button>
         </header>
+
         <section>
           <div className="infoUser">
             <h1>Olá, {user.name}</h1>
@@ -43,16 +47,42 @@ export const HomePage = () => {
 
           <div className="showModal">
             <h2>Tecnologia</h2>
-            <Link onClinck={() => setModal(!modal)}>
+            <Link onClick={() => setModal(!modal)}>
               <span>+</span>
             </Link>
           </div>
 
-          <div className="registerTech"></div>
+          {/* <TechUpdate /> */}
 
-          <div className="infoTechUser"></div>
+          <div className="registerTech">{modal && <Modal />}</div>
+
+          <div className="infoTechUser">
+            <ul>
+              {tech.techs &&
+                tech.techs.map((tech) => (
+                  <li
+                    key={tech.id}
+                    id={tech.id}
+                    onClick={() => {
+                      console.log(tech);
+                      setIdentify(tech);
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    <p>{tech.title}</p>
+                    <div>
+                      <p>{tech.status}</p>
+
+                      <Link onClick={() => handleDeleteTech(tech.id)}>
+                        <img src={lixeira} alt="Lixeira excluir" />
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          </div>
         </section>
       </main>
-    </div>
+    </StyledHome>
   );
 };

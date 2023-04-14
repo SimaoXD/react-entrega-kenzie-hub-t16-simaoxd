@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
     setLoading(true);
 
     try {
-      const response = await api.post("https://kenziehub.herokuapp.com/sessions", data);
+      const response = await api.post("/sessions", data);
       const { user, token } = response.data;
       toast.success("Login realizado com sucesso!");
       setUserLog(user);
@@ -46,6 +46,7 @@ export const UserProvider = ({ children }) => {
       navigate("/home", { replace: true });
     } catch (error) {
       toast.error("Algo deu errado");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -53,14 +54,15 @@ export const UserProvider = ({ children }) => {
 
   const registerUser = async (data) => {
     try {
-      const response = await api.post("https://kenziehub.herokuapp.com/users", data);
+      const response = await api.post("/users", data);
+      console.log(response);
 
       const id = response.data.id;
 
       toast.success("Cadastrado com sucesso");
-      navigate("/");
+      navigate(`/`);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

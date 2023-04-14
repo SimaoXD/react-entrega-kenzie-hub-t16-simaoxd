@@ -4,13 +4,16 @@ import App from "./App";
 import { UserProvider } from "./providers/UserContext";
 import { GlobalStyle } from "./styles/global";
 import { BrowserRouter } from "react-router-dom";
+import { TechProvider } from "./providers/TechContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <GlobalStyle />
-        <App />
+        <TechProvider>
+          <GlobalStyle />
+          <App />
+        </TechProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
