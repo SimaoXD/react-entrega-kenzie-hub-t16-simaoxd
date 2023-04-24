@@ -1,10 +1,12 @@
 import Logo from "../../assets/Logo.svg";
+import lixeira from "../../assets/lixeira.svg";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 import { TechContext } from "../../providers/TechContext";
 import StyledHome from "./style";
+import { ModalTech } from "../../components/Modais/RegisterTech";
 
 export const HomePage = () => {
   const { setIdentify, setIsModalOpen, handleDeleteTech, tech } = useContext(TechContext);
@@ -54,7 +56,7 @@ export const HomePage = () => {
 
           {/* <TechUpdate /> */}
 
-          <div className="registerTech">{modal && <Modal />}</div>
+          <div className="registerTech">{modal && <ModalTech />}</div>
 
           <div className="infoTechUser">
             <ul>

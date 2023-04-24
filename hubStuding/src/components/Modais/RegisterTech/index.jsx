@@ -1,16 +1,17 @@
 import React, { useContext, useEffect } from "react";
-import { TechContext } from "../../providers/TechContext";
-import { api } from "../../services/api";
-import { StyledModal } from "./style";
 
-export const RegisterTech = () => {
+import { StyledModal } from "./style";
+import { TechContext } from "../../../providers/TechContext";
+import { api } from "../../../services/api";
+
+export const ModalTech = () => {
   const { handleAddTech, techStatus, setIsModalOpen, setTechStatus, setTech, techTitle, setTechTitle } = useContext(TechContext);
 
   useEffect(() => {
     const getUser = async () => {
       const userId = localStorage.getItem("@KENZIEHUBUSER");
       const response = await api.get(`users/${userId}`);
-      setUser(response.data);
+      setTech(response.data);
     };
     getUser();
   }, []);
